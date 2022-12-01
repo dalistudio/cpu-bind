@@ -11,8 +11,8 @@
 /*
     将线程绑定到特定CPU，接口定义如下：
     #include <pthread.h>
-    int pthread_setaffinity_np(pthread_t thread, size_t cpusetsize, const cpu_set_t *cpuset);
-    int pthread_getaffinity_np(pthread_t thread, size_t cpusetsize, cpu_set_t *cpuset);
+    int pthread_setaffinity_np(pthread_t thread, size_t cpusetsize, const cpu_set_t *cpuset); // 设置CPU亲和性
+    int pthread_getaffinity_np(pthread_t thread, size_t cpusetsize, cpu_set_t *cpuset); // 获取CPU亲和性
     
     参数：
     thread: 线程
@@ -54,14 +54,14 @@ void *thread_func1(void *param)
     {
         CPU_ZERO(&cpu_set); // 清空
         CPU_SET(1, &cpu_set); // 设置 为cpu1
-        if (pthread_setaffinity_np(pthread_self(), sizeof(cpu_set),&cpu_set) < 0)
+        if (pthread_setaffinity_np(pthread_self(), sizeof(cpu_set),&cpu_set) < 0) // 调度，设置亲和性关系
             perror("pthread_setaffinity_np");
 
         WasteTime(); // 浪费时间
         
         CPU_ZERO(&cpu_set);
         CPU_SET(2, &cpu_set); // 设置 为cpu2
-        if (pthread_setaffinity_np(pthread_self(), sizeof(cpu_set),&cpu_set) < 0)
+        if (pthread_setaffinity_np(pthread_self(), sizeof(cpu_set),&cpu_set) < 0) // 调度，设置亲和性关系
             perror("pthread_setaffinity_np");
 
         WasteTime(); // 浪费时间
@@ -76,7 +76,7 @@ void *thread_func2(void *param)
     {
         CPU_ZERO(&cpu_set); // 清空
         CPU_SET(3, &cpu_set); // 设置 为cpu3
-        if (pthread_setaffinity_np(pthread_self(), sizeof(cpu_set),&cpu_set) < 0)
+        if (pthread_setaffinity_np(pthread_self(), sizeof(cpu_set),&cpu_set) < 0) // 调度，设置亲和性关系
             perror("pthread_setaffinity_np");
 
         WasteTime(); // 浪费时间

@@ -10,8 +10,8 @@
 /*
     将进程绑定到特定CPU，接口定义如下：
     #include <sched.h>
-    int sched_setaffinity(pid_t pid, size_t cpusetsize, const cpu_set_t *set); // 设置CPU绑定关系
-    int sched_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *set); // 获取CPU绑定关系
+    int sched_setaffinity(pid_t pid, size_t cpusetsize, const cpu_set_t *set); // 设置CPU亲和性
+    int sched_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *set); // 获取CPU亲和性
     
     参数：
     pid: 进程的id号，如果pid=0,则表示本进程。
@@ -52,28 +52,28 @@ int main(int argc, char *argv[])
     {
         CPU_ZERO(&cpu_set); // 清零
         CPU_SET(0, &cpu_set); // 设置为cpu0
-        if(sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) // 调度，设置关系
+        if(sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) // 调度，设置亲和性关系
             perror("sched_setaffinity");
             
         WasteTime(); // 浪费时间
         
         CPU_ZERO(&cpu_set); // 清零
         CPU_SET(1, &cpu_set); // 设置为cpu1
-        if(sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) // 调度，设置关系
+        if(sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) // 调度，设置亲和性关系
             perror("sched_setaffinity");
             
         WasteTime(); // 浪费时间
         
         CPU_ZERO(&cpu_set); // 清零
         CPU_SET(2, &cpu_set); // 设置为cpu2
-        if (sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) // 调度，设置关系
+        if (sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) // 调度，设置亲和性关系
             perror("sched_setaffinity");
             
         WasteTime(); // 浪费时间
         
         CPU_ZERO(&cpu_set); // 清零
         CPU_SET(3, &cpu_set); // 设置为cpu3
-        if(sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) // 调度，设置关系
+        if(sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) // 调度，设置亲和性关系
             perror("sched_setaffinity");
             
         WasteTime(); // 浪费时间
