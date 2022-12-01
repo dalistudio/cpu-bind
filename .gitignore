@@ -1,0 +1,13 @@
+__build__/
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.egg-info/
+.DS_Store
+
+process_test
+thread_test
+
+
