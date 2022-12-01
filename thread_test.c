@@ -86,6 +86,11 @@ void *thread_func2(void *param)
 // 主程序
 int main(int argc, char *argv[])
 {
+    // 可以执行下面命令禁用看看，1=开启，0=禁用
+    // #echo 0 > /sys/devices/system/cpu/cpu1/online
+    printf("CPU Core Total=%ld\n",sysconf(_SC_NPROCESSORS_CONF)); // 不一定准，可能存在禁用的CPU核
+    printf("CPU Core Usable=%ld\n",sysconf(_SC_NPROCESSORS_ONLN)); // 可用的CPU核
+    
     pthread_t my_thread;
     cpu_set_t cpu_set;
     
